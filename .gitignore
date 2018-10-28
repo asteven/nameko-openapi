@@ -1,0 +1,14 @@
+.#*
+*~
+*.egg-info
+*.orig
+*.pyc
+*.pyo
+*.rej
+*.swo
+*.swp
+/build/
+/dist/
+/log/
+/tmp/
+_junk
