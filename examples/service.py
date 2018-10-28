@@ -1,11 +1,5 @@
 import datetime
 import logging
-import time
-
-from werkzeug import Response
-
-from nameko.web.handlers import http
-from nameko.timer import timer
 
 from nameko_openapi import OpenApi
 
@@ -53,23 +47,6 @@ class PetstoreService(object):
         logging.info('Updating pet %s..', pet_id)
         PETS[pet_id].__dict__.update(pet.__dict__)
         return 200, NoContent
-
-    #@api.operation('put_pet', body_name='pet')
-    def _put_pet(self, pet_id, pet):
-        exists = pet_id in PETS
-        pet_dict = pet.__dict__
-        if exists:
-            logging.info('Updating pet %s..', pet_id)
-            PETS[pet_id].update(pet_dict)
-        else:
-            logging.info('Creating pet %s..', pet_id)
-            new_pet = {
-                'id': pet_id,
-                'created': datetime.datetime.utcnow(),
-            }
-            new_pet.update(pet.__dict__)
-            PETS[pet_id] = new_pet
-        return (200 if exists else 201), NoContent
 
     @api.operation('delete_pet')
     def delete_pet(self, pet_id):
